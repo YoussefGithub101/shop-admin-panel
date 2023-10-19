@@ -1,0 +1,92 @@
+<!--================Login Box Area =================-->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>See more Details</p>
+                    <h1>LOG IN PAGE</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+ 
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap ">
+    <div class="container ">
+        <div class="row ">
+            <!-- <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="./assets/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                        <a class="primary-btn" href="registration.html">Create an Account</a>
+                    </div>
+                </div>
+            </div> -->
+           <!-- <div class="col-lg-6">
+            <div class="site-logo">
+                <a href="index.html">
+                    <img src="assets/img/logo.png" alt="">
+                </a>
+            </div>
+           </div> -->
+               
+            <div class="col-lg-8 pu mx-auto ">
+                   
+                 
+                <div class="login_form_inner">
+                 
+                    <h3>login</h3>
+                    <form class="row login_form " [formGroup]="forms" (ngSubmit)='login(forms)'  >
+                              
+                       
+                        <div class="col-md-12 form-group">
+                            <input type="email" formControlName="email" class="form-control"  name="email"  placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'">
+                            <div class=" pt-3" *ngIf='forms.get("email")?.errors !=null && forms.get("email")?.touched'   role="alert">
+                                <p class="bb alert  " *ngIf='forms.get("email")?.errors?.["required"]' ><i class="fa-solid fa-exclamation mx-2"></i>email is required</p>
+                                <p class="bb alert " *ngIf='forms.get("email")?.errors?.["email"]'><i class="fa-solid fa-exclamation mx-2"></i>email is invalid</p>
+                              </div>
+                        </div>
+                        <div *ngIf='error' class="bk alert ">
+                            <i class="fa-solid fa-exclamation mx-2"></i> {{error}}
+                        </div> 
+                        <div class="col-md-12 form-group">
+                            <input  type="password" formControlName="password" class="form-control"  name="password"  placeholder="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'">
+                            <div  class=" pt-3" *ngIf='forms.get("password")?.errors !=null && forms.get("password")?.touched' role="alert">
+                                <p class="bc alert  " *ngIf='forms.get("password")?.errors?.["required"]'  ><i class="fa-solid fa-exclamation mx-2"></i>password is required</p>
+                                <p class="bc alert " *ngIf='forms.get("password")?.errors?.["minlength"]' ><i class="fa-solid fa-exclamation mx-2"></i>password is invalid</p>
+                              </div>
+                        </div>
+                        <div *ngIf='errors' class="bk alert ">
+                            <i class="fa-solid fa-exclamation mx-2"></i> {{errors }} 
+                         </div> 
+                        <!-- <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option2" name="selector">
+                                
+                            </div>
+                        </div> -->
+                        <div class="col-md-12 form-group mt-5 mb-5">
+                            <button [disabled]="forms.invalid" type="submit"  class="primary-btn mb-5">Login</button>
+
+                            <p class="text-light  d-inline ">Don't have an account?  <a class="d-inline"  routerLink="/register">Sign up</a></p>
+                             
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+
+
+
+
+

@@ -1,0 +1,304 @@
+/* You can add global styles to this file, and also import other style files */
+// Font family
+// Colors
+
+$primary-color: #F28123;
+$text-color: #051922;
+$text-color-light: #999999;
+$white-color: #fff;
+$black-color: #000;
+
+// Fonts
+
+$opensans-font: 'Open Sans', sans-serif;
+$poppins-font: 'Poppins', sans-serif;
+
+// Maximum widths
+
+$max-width-s: 576px;
+$max-width-m: 992px;
+$max-width-l: 1200px;
+
+// Spacing betwenn elements
+
+$space: 1.25rem;
+@mixin font-fam-sans {
+	font-family: $opensans-font;
+	font-weight: 400;
+}
+@mixin font-fam-sans-l {
+	font-family: $opensans-font;
+	font-weight: 300;
+}
+@mixin font-fam-sans-b {
+	font-family: $opensans-font;
+	font-weight: 700;
+}
+
+@mixin font-fam-pop {
+	font-family: $poppins-font;
+	font-weight: 400;
+}
+@mixin font-fam-pop-b {
+	font-family: $poppins-font;
+	font-weight: 700;
+}
+
+// Font sizes
+
+@mixin font-size-base {
+	font-size: 1rem;
+	letter-spacing: 0.1px;
+	line-height: 1.8;
+}
+
+// Anchor
+@mixin anchor{
+	@include transition(all, 0.2s, ease-in-out);
+
+	&:hover {
+		color: $primary-color;
+		text-decoration: none;
+	}
+}
+
+// Hover State
+@mixin boxed-btn-hvr {
+	background-color: #051922;
+    color: #F28123;
+	color: $white-color;
+	background-color: darken($primary-color, $darken);
+}
+@mixin bordered-btn-hvr {
+	color: $white-color;
+	background-color: darken($primary-color, $darken);
+}
+
+// Rounded corners
+
+@mixin rounded($radius: 5rem) {
+	border-radius: $radius;
+}
+
+// Shadows
+
+@mixin shadow($x: 5px, $y: 10px, $blur: 10px, $color: rgba(0, 0, 0, 0.1)) {
+	box-shadow: $x $y $blur $color;
+}
+
+@mixin shadow-none {
+	box-shadow: none;
+}
+
+// transition
+
+@mixin transition($property: all, $duration: .3s, $ease: ease-in-out) {
+	transition: $property $duration $ease;
+}
+
+// Media queries {based on bootstrap 4}
+
+$breakpoints: (
+		"mobile" : 575.98px,
+		"tablet" : 767.98px,
+		"desktop" : 991.98px,
+		"desktop-l" : 1199.98px,
+);
+
+@mixin mq-up($width, $type: min) {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
+
+@mixin mq-down($width, $type: max) {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+		@if $type == max {
+			$width: $width - 0.02px;
+		}
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
+/* -----------------------------------------------------------------------------
+
+# Base - Genral & Typography
+
+----------------------------------------------------------------------------- */
+
+html {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 28px;
+	height: 100%;
+}
+
+body {
+	@include font-fam-sans;
+	@include font-size-base;
+	color: $text-color;
+	overflow-x: hidden;
+	img {
+		max-width: 100%;
+	}
+}
+
+a {
+	cursor: pointer;
+	text-decoration: none;
+	@include anchor;
+}
+
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	@include font-fam-pop-b;
+	margin: 0 0 $space 0;
+	color: $text-color;
+
+	&:last-child {
+		margin: 0;
+	}
+}
+
+h1, .h1 {
+	font-size: 4rem;
+	font-weight: 700;
+	line-height: 4rem;
+
+	@include mq-down("tablet") {
+		font-size: 3rem;
+		line-height: 3.25rem;
+	}
+	@include mq-down("mobile") {
+		font-size: 2.5rem;
+		line-height: 2.75rem;
+	}
+}
+
+h2, .h2 {
+	font-size: 3rem;
+	font-weight: 700;
+	line-height: 3.25rem;
+
+	@include mq-down("tablet") {
+		font-size: 2.5rem;
+		line-height: 2.75rem;
+	}
+	@include mq-down("mobile") {
+		font-size: 2rem;
+		line-height: 2.25rem;
+	}
+}
+
+h3, .h3 {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 2.25rem;
+
+	@include mq-down("mobile") {
+		font-size: 1.75rem;
+		line-height: 2rem;
+	}
+}
+
+h4, .h4 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.75rem;
+
+	@include mq-down("mobile") {
+		font-size: 1.25rem;
+		line-height: 1.5rem;
+	}
+}
+
+h5, .h5 {
+	font-size: 1.25rem;
+	font-weight: 700;
+	line-height: 1.5rem;
+}
+
+h6, .h6 {
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.5rem;
+}
+
+p {
+	@include font-fam-sans;
+	@include font-size-base;
+	color: $text-color;
+	margin: 0 0 $space 0;
+
+	&:last-child {
+		margin: 0;
+	}
+}
+
+#alertAdd,#alertNotadded {
+	--top: 87px;
+	visibility: hidden;
+	min-width: 250px;
+	$test:87px;
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	color: black;
+	text-align: center;
+	border-radius: 10px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	transform: translate(-50%);
+	top:var(--top);
+	font-size: 16px;
+  }
+  
+  #alertAdd.show ,#alertNotadded.show {
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  @-webkit-keyframes fadein {
+	from {top: 0; opacity: 0;} 
+	to {top: var(--top); opacity: 1;}
+  }
+  
+  @keyframes fadein {
+	from {top: 0; opacity: 0;}
+	to {top: var(--top); opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+	from {top: var(--top); opacity: 1;} 
+	to {top: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+	from {top: var(--top); opacity: 1;}
+	to {top: 0; opacity: 0;}
+  }
+  .checkicon i{
+	  font-size: 40px;
+	  color: #47d764;
+  }
+  .checkicon2 i{
+	font-size: 40px;
+	  color: red;
+  }
+  @media (max-width: 979px) {
+	#alertAdd,#alertNotadded {
+	  --top: 0px;
+	}
+  }

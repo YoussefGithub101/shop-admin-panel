@@ -1,0 +1,113 @@
+<!-- single product -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>See more Details</p>
+                    <h1>Single Product</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="single-product mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner single-product-img ">
+                      <div class="carousel-item active"  *ngFor="let item of SingleProductdata.images|slice:0:1">
+                        <img class="d-block w-100" [src]="isExternalUrl(item) ? item : baseUrl + '/' + item" alt="First slide">
+                      </div>
+                      <div class="carousel-item"  *ngFor="let item of SingleProductdata.images|slice:1">
+                        <img class="d-block w-100" [src]="isExternalUrl(item) ? item : baseUrl + '/' + item"  alt="First slide">
+                      </div>
+<!--                       <div class="carousel-item" *ngFor="let item of SingleProductdata.images">
+                        <img class="d-block w-100" src={{item}}>
+                      </div> -->
+ 
+                    </div>
+                    <a class="carousel-control-prev prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+            </div>
+            <div class="col-md-7">
+                <div class="single-product-content">
+<!--                     <span class="rating">
+                        <ng-container *ngFor="let i of [1, 2, 3, 4, 5] ">
+                          <span [class]="i <= rating ? 'fa fa-star' : 'far fa-star'"
+                                (click)="setRating(i)"></span>
+                        </ng-container>
+                      </span> -->
+                    <h3>{{SingleProductdata.title}}</h3>
+                    <p class="single-product-pricing"><span>{{SingleProductdata.brand}}</span>{{SingleProductdata.price-(SingleProductdata.price *(SingleProductdata.discountPercentage/100)) | currency}}</p>
+                    <p>{{SingleProductdata.description}}.</p>
+                    <div class="single-product-form">
+                        
+                        <a href="javascript:void(0)" class="cart-btn" (click)="addToCart(SingleProductdata.id)"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        <p><strong>Categories: </strong>{{SingleProductdata.category}}</p>
+                    </div>
+                    <h4>Share:</h4>
+                    <ul class="product-share">
+                        <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                        <li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+                        <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alertAdd"  >
+    <div class="checkicon"> <i class="fas fa-check-square"></i> </div>
+    product added to cart!
+</div>
+<div id="alertNotadded" >
+    <div class="checkicon2" style="color: red;"> <i class="fas fa-times"></i> </div>
+    this product is already added to cart!
+</div>
+<!-- end single product -->
+<div class="container text-center my-3" *ngIf="SingleProductdata.comments?.length > 0">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ SingleProductdata.title }}</h5>
+            <div class="comments-section">
+              <hr>
+              <h4 class="card-subtitle mb-2 text-muted">Comments :</h4>
+              <div class="comment-list">
+                <div class="card text-left mb-3" *ngFor="let comment of commentsOfProudct ; let i=index ,trackBy: trackByMethod">
+                  <div class="card-body">
+                    <p class="card-text">
+                      <span style="color: #F28123; font-weight: 900;">{{comment.split(' ')[0]}}</span>
+                      {{comment.substr(comment.indexOf(' ') + 1)}}
+                    </p>                
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="container text-center">
+    <div class="row ">
+        <form action="" class="mx-auto col-10 col-md-6">
+            <input class="w-100 text-center p-3" required minlength="5" maxlength="50" placeholder="Add Comment"  [formControl]="formComment">
+            <div class="mx-auto col-10 col-md-6 p-3 btn btn-success my-5" (click)="pushComment()" style="background-color: #F28123;">Add Comment</div>
+        </form>
+    </div>
+</div>
+

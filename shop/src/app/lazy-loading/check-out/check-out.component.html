@@ -1,0 +1,218 @@
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1>Check Out Product</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+
+  <div class="checkout-section mt-150 mb-150">
+    <div class="container">
+      <h4>secand Data</h4>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-accordion-wrap">
+                    <div class="accordion" id="accordionExample">
+                      <div class="card single-accordion">
+                        <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                              Billing Address
+                            </button>
+                          </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="billing-address-form">
+                                <form [formGroup]="finalInformation" (ngSubmit)="dub(finalInformation)">
+                                    <p>
+                                        <input type="text" formControlName="Name" placeholder="Name">
+                                    </p>
+                                    <div  class="alert alert-info" *ngIf='finalInformation.get("Name")?.errors !=null && finalInformation.get("Name")?.touched' role="alert">
+                                        <p >firstName is required</p>
+                                      </div>
+                                    <p><input type="email" formControlName="Email" placeholder="Email"></p>
+                                    <div  class="alert alert-info" *ngIf='finalInformation.get("Email")?.errors !=null && finalInformation.get("Email")?.touched'   role="alert">
+                                        <p class="alert alert-info " *ngIf='finalInformation.get("Email")?.errors?.["required"]' >Email is required</p>
+                                        <p  class="alert  alert-info" *ngIf='finalInformation.get("Email")?.errors?.["email"]'>Email is invalid</p>
+                                      </div>
+                                    <p><input type="text" formControlName="Address" placeholder="Address"></p>
+                                    <div  class="alert alert-info" *ngIf='finalInformation.get("Address")?.errors !=null && finalInformation.get("Address")?.touched' role="alert">
+                                        <p >Address is required</p>
+                                      </div>
+                                    <p><input type="tel" formControlName="Phone" placeholder="Phone"></p>
+                                    <div  class="alert alert-info" *ngIf='finalInformation.get("Phone")?.errors !=null && finalInformation.get("Phone")?.touched' role="alert">
+                                        <p >Phone is required</p>
+                                      </div>
+                               
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card single-accordion">
+                        <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Shipping Address
+                            </button>
+                          </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="shipping-address-form">
+                                <p>{{finalInformation.get("Address")?.value}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class=" p-3" #paymentRef ></div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="order-details-wrap">
+                    <table class="order-details">
+                        <thead>
+                            <tr>
+                                <th>Your order Details</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-details-body">
+                            <tr>
+                                <td>Product</td>
+                                <td>Total</td>
+                            </tr>
+                            <tr *ngFor="let index of Myarray">
+                                <td>{{index.title}}</td>
+                                <td>{{index.price-(index.price *(index.discountPercentage/100)) | currency}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="checkout-details">
+                            <tr>
+                                <td>Subtotal</td>
+                                <td>{{totalPrice | currency }}</td>
+                            </tr>
+                            <tr>
+                                <td>Shipping</td>
+                                <td>$20</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{totalPrice + 20 | currency}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
+                  </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- *********************************************************************************** -->
+<!-- <div class="checkout-section mt-150 mb-150">
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-12 my-5">
+          <div class="order-details-wrap">
+              <table class="order-details text-center">
+                  <caption class="h3" style="caption-side:top ;text-align: center">Order Details</caption>
+                  <tbody class="order-details-body">
+                      <tr>
+                          <td style="background-color: gray;">Product</td>
+                          <td *ngFor="let index of Myarray">{{index.title}}</td>
+                          <td>Shipping</td>
+                          <td style="background-color: rgb(242, 129, 35); color: white; font-weight: 600;">Total</td>
+                      </tr>
+                      <tr >
+                          <td style="background-color: gray;">Total</td>
+                          <td *ngFor="let index of Myarray">{{index.price-(index.price *(index.discountPercentage/100)) | currency}}</td>
+                          <td>$20</td>
+                          <td style="background-color: rgb(242, 129, 35);color: white; font-weight: 600;">{{totalPrice + 20 | currency}} </td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-8">
+              <div class="checkout-accordion-wrap">
+                  <div class="accordion" id="accordionExample">
+                    <div class="card single-accordion">
+                      <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Billing Address
+                          </button>
+                        </h5>
+                      </div>
+
+                      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                          <div class="billing-address-form">
+                              <form [formGroup]="finalInformation" (ngSubmit)="dub(finalInformation)">
+                                  <p>
+                                      <input type="text" formControlName="Name" placeholder="Name">
+                                  </p>
+                                  <div  class="alert alert-info" *ngIf='finalInformation.get("Name")?.errors !=null && finalInformation.get("Name")?.touched' role="alert">
+                                      <p >firstName is required</p>
+                                    </div>
+                                  <p><input type="email" formControlName="Email" placeholder="Email"></p>
+                                  <div  class="alert alert-info" *ngIf='finalInformation.get("Email")?.errors !=null && finalInformation.get("Email")?.touched'   role="alert">
+                                      <p class="alert alert-info " *ngIf='finalInformation.get("Email")?.errors?.["required"]' >Email is required</p>
+                                      <p  class="alert  alert-info" *ngIf='finalInformation.get("Email")?.errors?.["email"]'>Email is invalid</p>
+                                    </div>
+                                  <p><input type="text" formControlName="Address" placeholder="Address"></p>
+                                  <div  class="alert alert-info" *ngIf='finalInformation.get("Address")?.errors !=null && finalInformation.get("Address")?.touched' role="alert">
+                                      <p >Address is required</p>
+                                    </div>
+                                  <p><input type="tel" formControlName="Phone" placeholder="Phone"></p>
+                                  <div  class="alert alert-info" *ngIf='finalInformation.get("Phone")?.errors !=null && finalInformation.get("Phone")?.touched' role="alert">
+                                      <p >Phone is required</p>
+                                    </div>
+                              </form>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div class="card single-accordion">
+                      <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Shipping Address
+                          </button>
+                        </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                          <div class="shipping-address-form">
+                              <p>{{finalInformation.get("Address")?.value}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8">
+            <div class=" py-3 my-5" #paymentRef ></div>
+          </div>
+        </div>
+  </div>
+</div>
+
+ -->

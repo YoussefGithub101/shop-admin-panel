@@ -1,0 +1,48 @@
+<div class="row product-lists">
+    
+    <div class="col-lg-4 col-md-6 text-center"  *ngFor="let prod of categoriesName | paginate :{
+        itemsPerPage:tableSize,
+        currentPage:page,
+        totalItems:count}; let i=index" >
+        <div class="single-product-item" >
+            <div class="product-image" (click)="goToproductID(prod.id)">
+                <a ><img [src]="isExternalUrl(prod.thumbnail) ? prod.thumbnail : baseUrl + '/' + prod.thumbnail" alt="" ></a>
+            </div>
+            <h3>{{prod.title}}</h3>
+            <span>{{prod.brand}}</span>
+            <div class="d-flex  justify-content-around flex-wrap">
+            <p class="product-price" style="color: black;"> {{prod.price-(prod.price *(prod.discountPercentage/100)) | currency}}  </p>
+            <p class="product-price">  <del style="color: #F28123;">${{prod.price}}</del>  </p>
+            </div>
+            <a href="javascript:void(0)" class="cart-btn" (click)="addToCart(prod.id)"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="pagination-wrap">
+                <pagination-controls 
+                previousLabel="Prev"
+                nextLabel="Next"
+                (pageChange)="onTableDataChange($event)"
+                class="my-pagination">
+                    
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <div id="alertAdd"  >
+        <div class="checkicon"> <i class="fas fa-check-square"></i> </div>
+        product added to cart!
+    </div>
+    <div id="alertNotadded" >
+        <div class="checkicon2" style="color: red;"> <i class="fas fa-times"></i> </div>
+        this product is already added to cart!
+    </div>

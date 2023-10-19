@@ -1,0 +1,214 @@
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>SHOPPING & ORGANIC</p>
+					<h1>Shop</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="wrapper"  >
+	<!-- Sidebar -->
+	<nav id="sidebar">
+		<div class="sidebar-header">
+			<h3 style="color: white;">category</h3>
+			<span>
+				<button type="button" id="sidebarCollapse" (click)="toggleSidebar()" class="btn btn-info btn2" style="
+				background-color: #364B55;">
+				<i class="fas fa-times"></i>
+
+			</button>
+			</span>
+		</div>
+
+		<ul class="list-unstyled components">
+
+
+			<li><a routerLink="/store/Shop" routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact: true}">All</a> </li>
+
+			<li *ngFor="let prod of categories index as i"> <a [routerLink]="['categorie/',prod]" routerLinkActive="activeLink">{{prod}}</a></li>
+		</ul>
+	</nav>
+	<div id="content" style=" width: 100%;" >
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<button type="button" id="sidebarCollapse" (click)="toggleSidebar()" class="btn btn-info" style="
+					background-color: #364B55;">
+					<i class="fas fa-align-left"></i>
+					<span class="iconn"> show category</span>
+				</button>
+			</div>
+		</nav>
+		 <!-- -------------------------------------------------- -->
+		 <div class="product-section  ">
+			 <svg viewBox="25 25 50 50" *ngIf="isLoaded">
+				 <circle r="20" cy="50" cx="50"></circle>
+			   </svg>
+			<div class="container" *ngIf="!isLoaded">
+
+
+
+				<ng-template [ngIf]="(this.router.url=='/store/Shop') ? true : false">
+				<div class="row product-lists">
+
+
+					<div class="col-lg-4 col-md-6 text-center"  *ngFor="let prod of product | paginate :{
+						itemsPerPage:tableSize,
+						currentPage:page,
+						totalItems:count}; let i=index" >
+						<div class="single-product-item" >
+							<div class="product-image" (click)="goToproductID(prod.id)">
+								<a>
+									<img src="http://localhost:8080/{{prod.thumbnail}}" alt="" onerror="this.style.display='none'">
+									<img src={{prod.thumbnail}} alt="" onerror="this.style.display='none'">
+								</a>
+							</div>
+							<h3>{{prod.title}}</h3>
+							<span>{{prod.brand}}</span>
+							<div class="d-flex  justify-content-around flex-wrap">
+							<p class="product-price" style="color: black;"> {{prod.price-(prod.price *(prod.discountPercentage/100)) | currency}}  </p>
+							<p class="product-price">  <del style="color: #F28123;">${{prod.price}}</del>  </p>
+							</div>
+							<a href="javascript:void(0)" class="cart-btn" (click)="addToCart(prod.id)"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+						</div>
+					</div>
+					<div id="alertAdd">
+						<div class="checkicon"> <i class="fas fa-check-square"></i> </div>
+						product added to cart!
+					</div>
+					<div id="alertNotadded" >
+						<div class="checkicon2" style="color: red;"> <i class="fas fa-times"></i> </div>
+						this product is already added to cart!
+					</div>
+
+
+
+
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="pagination-wrap">
+								<pagination-controls
+								previousLabel="Prev"
+								nextLabel="Next"
+								(pageChange)="onTableDataChange($event)"
+								class="my-pagination">
+
+								</pagination-controls>
+						</div>
+					</div>
+				</div>
+				</ng-template>
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <button (click)="goToDiscount()"> Discount Product</button> -->
+
+	<!-- end products -->
+
+
+
+
+
+	<!-- 			<div class="row">
+                <div class="col-md-12">
+					<div class="dropdown product-filters" >
+						<button class="dropbtn">categories</button>
+						<div class="dropdown-content">
+						<a *ngFor="let prod of categories">{{prod}}</a>
+
+						</div>
+					  </div>
+                </div>
+            </div> -->
+
+
+
+			<!-- 				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="pagination-wrap">
+							<ul>
+								<li><a href="#">Prev</a></li>
+								<li><a href="#">1</a></li>
+								<li><a class="active" href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">Next</a></li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+
+
+
+
+
+
+
+<!-- 				<div class="row">
+					<div class="col-lg-12 text-center">
+						<div class="pagination-wrap">
+							<ul>
+								<li><a href="#">Prev</a></li>
+								<li><a href="#">1</a></li>
+								<li><a class="active" href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">Next</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>  -->

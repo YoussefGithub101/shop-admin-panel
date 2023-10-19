@@ -1,0 +1,69 @@
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>See more Details</p>
+                    <h1>Registration Page</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+
+
+<div class="container mt-5">
+    <h2>update Product</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class=" col-md-6 mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" formControlName="description" required></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="price" class="form-label">Price</label>
+          <input type="number" class="form-control" id="price" formControlName="price" step="0.01" min="0" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="discountPercentage" class="form-label">Discount Percentage</label>
+          <input type="number" class="form-control" id="discountPercentage" formControlName="discountPercentage" step="0.01" min="0" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="stock" class="form-label">Stock</label>
+          <input type="number" class="form-control" id="stock" min="0" formControlName="stock" required>
+        </div>
+      </div>
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label for="brand" class="form-label">Brand</label>
+            <input type="text" class="form-control" id="brand" formControlName="brand" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" formControlName="category" required>
+          </div>
+        </div>
+      <div class="mb-3">
+        <label for="thumbnail" class="form-label">Thumbnail URL</label>
+        <input type="file" class="form-control" id="thumbnail" (change)="onThumbnailChange($event)">
+       </div>
+      <div class="mb-3">
+        <label for="images" class="form-label">images URL</label>
+        <input type="file" class="form-control" id="images" multiple (change)="onImagesChange($event)">
+       </div>
+ 
+ 
+       <pre>{{ productForm.value | json }}</pre>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <br><br>
