@@ -13,6 +13,7 @@ export class AddProductsComponent implements OnInit{
   files: any[] = [];
   thumbnailFile:boolean =false;
   thumbnailSrc:string;
+  hidebutton:boolean =false;
   @ViewChild('blah', { static: false }) blahElement: ElementRef;
   constructor(private formBuilder: FormBuilder,private DashboardService:DashboardService){
     
@@ -90,23 +91,34 @@ export class AddProductsComponent implements OnInit{
 
 
   addproduct(productData: FormData) {
+    this.hidebutton=true
     this.DashboardService.addproduct(productData).subscribe({
       next: (data: any) => {
         this.productAdded_success()
+        this.hidebutton=false
         console.log('Product added successfully', data);
       },
       error: (error) => {
         this. productAdded_error(error)
+        this.hidebutton=false
         console.error('Error adding product', error)
       }
     });
   }
 
   productAdded_success(){
+    this.productForm.reset();
+
+    // Reset other state variables if necessary
+    this.files = [];
+    this.thumbnailFile = false;
+    this.thumbnailSrc = '';
+
     Swal.fire({
       icon: 'success',
       title: 'Product added successfully'
     })
+
   }
   productAdded_error(error: string){
     Swal.fire({
@@ -156,10 +168,13 @@ fileBrowseHandler(event: Event) {
  * @param index (File index)
  */
  
-deleteFile(index: number) {
-  this.files.splice(index, 1);
+deleteFile(name: string) {
+ 
+  console.log(this.files)
+  
   this.files =[...this.productForm.get('images')?.value]
-  this.files.splice(index, 1);
+  this.files= this.files.filter((file: any) => file.name !== name);
+  
   // so i set images.value or the(fileList) to an array and delete the image than set the filelist to the new one
   this.productForm.get('images')?.setValue(this.files);
   console.log(this.files);
@@ -177,11 +192,11 @@ uploadFilesSimulator(index: number) {
           clearInterval(progressInterval);
           this.uploadFilesSimulator(index + 1);
         } else {
-          this.files[index].progress += 5;
+          this.files[index].progress += 20;
         }
       }, 200);
     }
-  }, 1000);
+  }, 300);
 }
 
 /**

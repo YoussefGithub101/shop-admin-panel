@@ -9,7 +9,7 @@ import { FormsModule ,ReactiveFormsModule   } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { DndDirective } from './add-products/dnd.directive';
 import { ProgressComponent } from './add-products/progress/progress.component';
-
+ 
 @NgModule({
   declarations: [
     
@@ -21,6 +21,7 @@ import { ProgressComponent } from './add-products/progress/progress.component';
             ProgressComponent
   ],
   imports: [
+    
     CommonModule,
     DashBoardRoutingModule,
     NgxPaginationModule,

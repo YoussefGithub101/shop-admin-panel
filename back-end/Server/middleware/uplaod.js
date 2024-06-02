@@ -1,8 +1,20 @@
 const path=require('path')
 const multer = require('multer');
+require('dotenv').config();
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('..//util/cloudinary') ;
+ 
 
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: 'uploads', // optional, specify the folder in Cloudinary
+    //   format: async (req, file) => 'png', // supports promises as well
+      public_id: (req, file) => Date.now() + path.extname(file.originalname), // The file on cloudinary would have the same name as the original file name but with a timestamp
+    },
+  });
 
-var storage = multer.diskStorage({
+  const storage1 = multer.diskStorage({
     destination:function(req,file,cb){
         cb(null,'uploads/')
     },

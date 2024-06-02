@@ -14,60 +14,14 @@
 
 <div class="container mt-5">
     <h2>Add New Product</h2>
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-md-7">
-          <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" formControlName="title" required>
-
-          <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" id="description" formControlName="description" required></textarea>
-
-          <label for="brand" class="form-label">Brand</label>
-          <input type="text" class="form-control" id="brand" formControlName="brand" required>
-
-          <label for="category" class="form-label">Category</label>
-          <input type="text" class="form-control" id="category" formControlName="category" required>
-        </div>
-
-
-        <div class="col-12 col-md-5">
-          <label for="price" class="form-label">Price</label>
-          <input type="number" class="form-control" id="price" formControlName="price" step="1" min="0" required>
-
-
-          <label for="discountPercentage" class="form-label">Discount Percentage</label>
-          <input type="number" class="form-control" id="discountPercentage" formControlName="discountPercentage" step="0.50" min="0" max='90' required>
-
-          <label for="stock" class="form-label">Stock</label>
-          <input type="number" class="form-control" id="stock" min="0" formControlName="stock" required>
-        </div>
-        
-
-
-
-       
  
-      </div>
- 
-
-<!--       <div class="mb-3">
-        <label for="images" class="form-label">images URL</label>
-        <input type="file" class="form-control" id="images" multiple (change)="onImagesChange($event)" required>
-       </div> -->
-
-
-
-
-
-
-<br>
-        <div class="row justify-content-center">
-          <div class="col-md-6"  class="thumbnail_contaner">
-
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-center" >
+          <div class="col-12 col-md-4"  class="thumbnail_contaner">
+  
             <div *ngIf="!thumbnailFile" class="dropfile" appDnd (fileDropped)="onFileDropped_thumbnail($event)">
                <input type="file" class="form-control" id="thumbnail"(change)="onThumbnailChange($event)" accept="image/png, image/jpeg" required>
-              <h2>Thumbnail Image</h2>
+              <h2>Thumbnail</h2>
             <img src="../assets/img/Drop-image.svg" alt="">
               <h3>Drag and drop file here</h3>
               <h3>or</h3>
@@ -76,8 +30,8 @@
            
               <div *ngIf="thumbnailFile" class="">
                 <img class="thumbnail_img" src={{thumbnailSrc}} alt="your image" />
-
-
+  
+  
                 <div class="dropfile dropfile-after" appDnd (fileDropped)="onFileDropped_thumbnail($event)">
                   <input type="file" class="form-control" id="thumbnail"(change)="onThumbnailChange($event)" accept="image/png, image/jpeg" required>
                  <h2>Change Thumbnail</h2>
@@ -88,62 +42,124 @@
                </div>
               </div>
                
-              <!-- <label for="thumbnail" class="form-label">Thumbnail URL</label>
-              <input type="file" class="form-control" id="thumbnail"(change)="onThumbnailChange($event)" accept="image/png, image/jpeg" required> -->
+              
               
           </div>
-
-
-
           <div class="col-md-6">
-            <div class="dropfile" appDnd (fileDropped)="onFileDropped($event)">
-              <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)" accept="image/png, image/jpeg" required/>
-              <h2>Product images</h2>
-            <img src="../assets/img/Drop-image.svg" alt="">
-              <h3>Drag and drop file here</h3>
-              <h3>or</h3>
-              <label for="fileDropRef">Browse for file</label>
-            </div>
-            <div class="files-list">
-              <div class="single-file" *ngFor="let file of files; let i = index">
-                <div class="file-icon" style="width: 50px">
-                  <img src="../assets/img/file-image.svg" alt="">
-                </div>
-                <div class="info">
-                  <h4 class="name">
-                    {{ file?.name }}
-                  </h4>
-                  <p class="size">
-                    {{ formatBytes(file?.size) }}
-                  </p>
-                  <app-progress [progress]="file?.progress"></app-progress>
-                </div>
-            
-                <div class="delete" (click)="deleteFile(i)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
-                    <path fill="#B1B1B1" fill-rule="nonzero"
-                      d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
-                  </svg>
-                </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" formControlName="title" required>
+                
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" formControlName="category" required>
+
+                <label for="discountPercentage" class="form-label mt-3">Discount Percentage</label>
+                <input type="number" class="form-control" id="discountPercentage" formControlName="discountPercentage" step="0.50" min="0" max='90' required>
+      
+              </div>
+              <div class="col-md-6">
+                <label for="brand" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brand" formControlName="brand" required>
+      
+                
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" formControlName="price" step="1" min="0" required>
+      
+                <label for="stock" class="form-label">Stock</label>
+                <input type="number" class="form-control" id="stock" min="0" formControlName="stock" required>
               </div>
             </div>
-
+  
+  
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control textarea" id="description" formControlName="description" required></textarea>
+  
           </div>
+  
+  
+   
+  
+          
+         
+   
+        </div>
+   
+  
+   
+  
+  
+  
+  
+  
+  
+  <br>
+         
+   
+  
+  
+  
+             
+              <div *ngIf="!productForm.get('images')?.value || productForm.get('images')?.value.length === 0" class="dropfile" appDnd (fileDropped)="onFileDropped($event)">
+                <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event)" accept="image/png, image/jpeg" required/>
+                <h2>Product images</h2>
+              <img src="../assets/img/Drop-image.svg" alt="">
+                <h3>Drag and drop file here</h3>
+                <h3>or</h3>
+                <label for="fileDropRef">Browse for file</label>
+              </div>
+              <div class="row files-list">
+                <div class="col-md-4 single-file" *ngFor="let file of files; let i = index">
+                  <div class="file-icon" style="width: 50px">
+                    <img src="../assets/img/file-image.svg" alt="">
+                  </div>
+                  <div class="info">
+                    <h4 class="name">
+                      {{ file?.name }}
+                    </h4>
+                    <p class="size">
+                      {{ formatBytes(file?.size) }}
+                    </p>
+                    <app-progress [progress]="file?.progress"></app-progress>
+                  </div>
+              
+                  <div class="delete" (click)="deleteFile(file?.name)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18">
+                      <path fill="#B1B1B1" fill-rule="nonzero"
+                        d="M1 16c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v10zm3.17-7.83a.996.996 0 0 1 1.41 0L7 9.59l1.42-1.42a.996.996 0 1 1 1.41 1.41L8.41 11l1.42 1.42a.996.996 0 1 1-1.41 1.41L7 12.41l-1.42 1.42a.996.996 0 1 1-1.41-1.41L5.59 11 4.17 9.58a.996.996 0 0 1 0-1.41zM10.5 1L9.79.29C9.61.11 9.35 0 9.09 0H4.91c-.26 0-.52.11-.7.29L3.5 1H1c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+  
+            
+         
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+         
+   
+        <button *ngIf="!hidebutton" type="submit" [disabled]="productForm.invalid" class="btn" [ngClass]="productForm.valid ? 'btn btn-primary':'btn btn-danger'">Submit</button>
+ 
+        <div *ngIf="hidebutton" class="spinner-border" role="status">
+          
         </div>
 
+        
+      </form>
 
 
 
 
+  
 
-
-
-
-
-       
- 
-      <button type="submit" [disabled]="productForm.invalid" class="btn" [ngClass]="productForm.valid ? 'btn btn-primary':'btn btn-danger'">Submit</button>
-    </form>
     <!-- <pre>{{ productForm.value | json }}</pre> -->
   </div>
   <br><br>

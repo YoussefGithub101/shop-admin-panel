@@ -53,7 +53,13 @@ export class DashProductsComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (ID < 30 ){
+        Swal.fire({
+          icon: 'warning',
+          title: 'Error.',
+          text:'sorry only costume products can be deleted.',
+        })
+      }else if (result.isConfirmed) {
         
         this.DashboardService.DeleteProduct(ID).subscribe({
           next:(data:any)=>{
@@ -68,7 +74,7 @@ export class DashProductsComponent implements OnInit {
             Swal.fire({
               icon: 'warning',
               title: 'Error.',
-              text:'sorry only costume products can be deleted.',
+              text:'something went wrong we will fix it soon.',
             }
  
           )

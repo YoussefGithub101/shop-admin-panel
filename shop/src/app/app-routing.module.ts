@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
+ 
 import { RegisterComponent } from './register/register.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AboutComponent } from './about/about.component';
+ 
 import { CheckOutComponent } from './lazy-loading/check-out/check-out.component';
 import { isAuthenticatedGuard } from './Route Guard/is-authenticated.guard';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'home', component: MainComponent },
-  { path: 'about', component: AboutComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'DashBoard' },
+ 
 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

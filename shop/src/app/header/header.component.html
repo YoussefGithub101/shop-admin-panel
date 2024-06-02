@@ -22,36 +22,37 @@
 
                     <!-- menu start -->
                     <nav class="main-menu">
-                        <ul>
-                            <li><a routerLink="/home"  routerLinkActive="active1">Home</a></li>
-                            <li><a routerLink="/about" routerLinkActive="active1">About</a></li>
- 
+                        <ul> 
                             <li><a routerLink="/store/Shop"  routerLinkActive="active1">Shop</a>
                             </li>
                             <li><a routerLink="/DashBoard"  routerLinkActive="active1">DashBoard</a>
                             </li>
                            <!--  <li><a href="contact.html">Contact</a></li> -->
-                           <li *ngIf="!islogin"><a routerLink="/login"  routerLinkActive="active1">Login</a></li>
+<!--                            <li *ngIf="!islogin"><a routerLink="/login"  routerLinkActive="active1">Login</a></li>
                            <li *ngIf="!islogin"><a routerLink="/register"  routerLinkActive="active1">register</a></li>
-                           <li  *ngIf="islogin" (click)="logOut()"><a routerLink="/login">logOut</a></li>
+                           <li  *ngIf="islogin" (click)="logOut()"><a routerLink="/login">logOut</a></li> -->
 
                             <li>
                                 <div class="header-icons">
                                      
-                                        <a class="shopping-cart wrapperCart" routerLink="/store/cart">
-                                            <i class="fas fa-shopping-cart" ></i>
-                                            <span class="CartCount font-weight-bold text-center">{{CartService.totalQuantity}}</span>
-                                            </a> <!-- cart -->
-                                            
-                                     
-                                    <a class="mobile-hide search-bar-icon" href="javascript:void(0)"><i class="fas fa-search"></i></a>
-                                    <a>
-                                        <div *ngIf="islogin" class="jj d-inline ">{{_userService.username}}</div>
-                                   
-                                      
-                                    </a>
+
+                                    <a><div *ngIf="islogin" class="jj d-inline ">{{_userService.username}}</div></a>
+
+                                    <li *ngIf="!islogin"><a routerLink="/login"  routerLinkActive="active1">Login</a></li>
+                                    <li *ngIf="!islogin"><a routerLink="/register"  routerLinkActive="active1">register</a></li>
+                                    <li  *ngIf="islogin" (click)="logOut()"><a routerLink="/login">logOut</a></li>
+                                    
+                                    <a class="shopping-cart wrapperCart" routerLink="/store/cart">
+                                        <i class="fas fa-shopping-cart" ></i>
+                                        <span class="CartCount font-weight-bold text-center">{{CartService.totalQuantity}}</span>
+                                        </a> <!-- cart -->
+                                        
+                                 
+                                <a class="mobile-hide search-bar-icon" href="javascript:void(0)"><i class="fas fa-search"></i></a>
                                    </div> 
+                                   
                             </li>
+
                         </ul>
                     </nav>
                     <a class="mobile-show search-bar-icon" href="javascript:void(0)"><i class="fas fa-search"></i></a>

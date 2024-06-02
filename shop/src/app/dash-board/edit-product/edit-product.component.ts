@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators ,FormArray,FormControl } from '@angular/forms';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -14,7 +15,7 @@ export class EditProductComponent implements OnInit {
   SingleProductID:any;
   errorMessage: any;
    productForm: FormGroup;
-   
+   hidebutton:boolean =false;
 constructor(private DashboardService:DashboardService,private formBuilder: FormBuilder,private ProductsService: ProductsService,private activated: ActivatedRoute){}
 
 ngOnInit(): void {
@@ -83,12 +84,29 @@ ngOnInit(): void {
     }
   }
   updateproduct(productId:number,productData: FormData) {
-    this.DashboardService.updateproduct(productId,productData).subscribe({
-      next: (data: any) => {
-        console.log('Product updated successfully', data);
-      },
-      error: (error) => console.error('Error adding product', error)
-    });
+    this.hidebutton=true
+    if(productId < 30){
+      Swal.fire({
+        icon: 'error',
+        title: 'Sorry!',
+        text: "only coustom products can be edited",
+      })
+      this.hidebutton=false
+    } else{
+
+      this.DashboardService.updateproduct(productId,productData).subscribe({
+        next: (data: any) => {
+          this.productAdded_success()
+          this.hidebutton=false
+          console.log('Product updated successfully', data);
+        },
+        error: (error) => {
+          console.error('Error adding product', error)
+          this.hidebutton=false
+          this.productAdded_error(error)
+        }
+      });
+    }
   }
 
   onThumbnailChange(event: Event) {
@@ -103,6 +121,22 @@ ngOnInit(): void {
       // Update the "images" field with the FileList
       this.productForm.get('images')?.setValue(inputElement.files);
     }
+  }
+
+  productAdded_success(){
+ 
+    Swal.fire({
+      icon: 'success',
+      title: 'Product updated successfully'
+    })
+
+  }
+  productAdded_error(error: string){
+    Swal.fire({
+      icon: 'error',
+      title: 'Something went wrong!',
+      text: error,
+    })
   }
 }
 
