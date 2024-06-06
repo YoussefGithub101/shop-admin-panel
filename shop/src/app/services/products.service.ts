@@ -8,7 +8,7 @@ import { Iproducts } from "../interfaces/products"
 export class ProductsService {
   cartData: Iproducts[] = [];
   product = [];
-  _url = 'https://shop-admin-panel-1.onrender.com/product';
+  _url = 'https://shop-admin-\panel-1.onrender.com/product';
 
   make(token: any): Observable<any> {
     const url = `https://shop-admin-panel-1.onrender.com/create-payment-intent`

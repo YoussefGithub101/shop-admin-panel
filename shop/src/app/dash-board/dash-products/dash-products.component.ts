@@ -12,7 +12,7 @@ import { ActivatedRoute, Router} from '@angular/router';
 export class DashProductsComponent implements OnInit {
   product:any=[];
   errorMessage: any;
-
+  isLoaded:boolean=true;
   title='pagination'
 
   page:number=1;
@@ -32,6 +32,7 @@ export class DashProductsComponent implements OnInit {
     this.ProductsService.getAllproducts().subscribe({
       next:(data:any)=>{
         this.product=data
+        this.isLoaded=false;
       },error:error=>this.errorMessage=error
     })
 
